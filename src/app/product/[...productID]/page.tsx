@@ -5,7 +5,7 @@ import Image from 'next/image';
 export default async function Product({params}:{params:{productID:string}}){
   const productID = params.productID[0];
   const product = await getProduct(productID) as any;
-  const {description, images, title, unit_price} = product.fields
+  const {description, images, title, unit_price, objectID} = product.fields
   const image = images[0].url
 
   return (
@@ -16,7 +16,7 @@ export default async function Product({params}:{params:{productID:string}}){
         <p>{description}</p>
         <p className='font-bold'>${unit_price}</p>
         <div className="card-actions justify-end">
-          <ProductButton product={{title, unit_price}} />
+          <ProductButton product={{title, unit_price, img: image, id: objectID}} />
         </div>
       </div>
     </div>
