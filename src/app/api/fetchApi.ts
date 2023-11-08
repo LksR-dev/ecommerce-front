@@ -7,12 +7,11 @@ interface RequestOptions {
 export const fetchApi = async (direction: string, config: RequestOptions) => {
   // const BASE_API_URL =
   //   process.env.NODE_ENV === "production"
-  //     ? "https://crud-nextjs-ts.vercel.app/api"
+  //     ? process.env.PRODUCTION_URL
   //     : "http://localhost:3001/api";
-  const BASE_API_URL = "https://crud-nextjs-ts.vercel.app/api"
+  const BASE_API_URL = process.env.PRODUCTION_URL
 
   const url = BASE_API_URL + direction;
-
   const fullConfig = {
     ...config,
   };
