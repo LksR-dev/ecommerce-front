@@ -2,20 +2,36 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import profilePic from '@/app/assets/profile-pic-placeholder.png'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { getToken, removeAuthToken } from '@/app/lib/token'
+import {useGetAuthToken, useRemoveAuthToken} from '../hooks/token'
 
 export default function ProfileButton(){
   const [isUserOn, setIsUserOn] = useState<boolean>(false);
+  const [deleteAuthToken, setDeleteAuthToken] = useState<boolean>(false);
+  const token = useGetAuthToken();
+
+  useEffect(()=>{
+    if(token.token) {
+      setIsUserOn(true);
+      setDeleteAuthToken(false)
+    }
+  }, [token])
+  
+  useRemoveAuthToken(deleteAuthToken)
+  function handleLogout(){
+    setIsUserOn(false)
+    setDeleteAuthToken(true)
+  }
 
   const userOn = <div className="card-body">
                   <Link href='/'>Mi perfil</Link>
                   <Link href='/'>Mis pedidos</Link>
-                  <Link href='/'>Cerrar sesión</Link>
+                  <Link href='/' onClick={handleLogout}>Cerrar sesión</Link>
                 </div>;
   const userOff = <div className="card-body">
                     <Link href='/login'>Iniciar sesión</Link>
                   </div>;
-
   return (
     <div className="dropdown dropdown-end mr-4">
       <label className="btn-ghost btn-circle btn">

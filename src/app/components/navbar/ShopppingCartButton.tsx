@@ -1,11 +1,15 @@
 'use client';
 import Link from 'next/link'
+import { useRecoilValue } from 'recoil';
+import { totalItemsState, totalPriceState } from '@/app/lib/cartState';
 
 interface ShoppingCartButtonProps {
   cart: number | null
 }
 
 export default function ShoppingCartButton({cart}:ShoppingCartButtonProps){
+  const totalItems = useRecoilValue(totalItemsState);
+  const totalPrice = useRecoilValue(totalPriceState);
 
   function closeDropDown(){
     const elem = document.activeElement as HTMLElement;
@@ -25,18 +29,18 @@ export default function ShoppingCartButton({cart}:ShoppingCartButtonProps){
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
           </svg>
           <span className="badge badge-sm indicator-item">
-            {cart || 0}
+            {totalItems || 0}
           </span>
         </div>
       </label>
       <div tabIndex={0} className="card dropdown-content card-compact mt-3 w-52 bg-base-100 shadow z-30">
         <div className="card-body">
-          <span className="text-lg font-bold">{cart || 0}Items</span>
+          <span className="text-lg font-bold">{totalItems || 0} Productos</span>
           <span className="text-info">
-            Subtotal: $20
+            Subtotal: ${totalPrice}
           </span>
           <div className="card-actions">
-            <Link href="/cart" className="btn btn-primary btn-block" onClick={closeDropDown}>View cart</Link>
+            <Link href="/my-orders" className="btn btn-primary btn-block" onClick={closeDropDown}>View cart</Link>
           </div>
         </div>
       </div>

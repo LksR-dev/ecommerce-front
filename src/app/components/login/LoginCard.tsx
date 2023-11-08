@@ -1,28 +1,31 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import logo from '@/app/assets/craft-beer-logo-with-beer.png';
 import Image from 'next/image';
-import {sendAuthCode} from '@/app/api'
+import { signUp, sendAuthCode } from '@/app/api'
+import { useRouter } from 'next/navigation';
+import { useLoginUser } from '@/app/hooks'
+
 
 export default function LoginCard() {
   const [email, setEmail] = useState('');
   const [showCodeInput, setShowCodeInput] = useState(false);
   const [code, setCode] = useState('');
+  const router = useRouter();
+  const {logged,error} = useLoginUser({email, code});
+
 
   async function onSubmit(e: any) {
     e.preventDefault();
     if (!showCodeInput) {
       setShowCodeInput(true);
-      const res = await sendAuthCode(email)
-      console.log(res)
+      await sendAuthCode(email)
     } else {
-      // Aquí puedes realizar alguna acción con el código ingresado
-      console.log('Código ingresado:', code);
-      // También puedes redirigir al usuario a la siguiente página o realizar otras acciones necesarias
+      if(error) alert({error, Message: 'hubo un error al loguearse'})
+      if(logged) router.push('/')
     }
   }
-
-  function goBack() {
+  const goBack = () => {
     setShowCodeInput(false);
   }
 
