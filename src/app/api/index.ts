@@ -21,6 +21,15 @@ async function signUp(email: string, code:string) {
   }
 }
 
+async function getUserData(token:string) {
+  const response = await getConfig("/me", token);
+  if (!response.error) {
+    return { status: true, response };
+  } else {
+    return { status: false, error: response.error };
+  }
+}
+
 async function products(){
   const response = await getConfig("/products/search?limit=15&offset=0")
   if(!response.error){
@@ -39,4 +48,13 @@ async function getProduct(id:string){
   }
 }
 
-export { sendAuthCode, signUp, products, getProduct }
+async function goToPay(productsIDs: string[], token:string){
+  const response = await postConfig(`/order`, {productsIDs}, token)
+    if(!response.error){
+    return response.urlToRedirect;
+  } else {
+    throw new Error(response.error)
+  }
+}
+
+export { sendAuthCode, signUp, products, getProduct, getUserData, goToPay }

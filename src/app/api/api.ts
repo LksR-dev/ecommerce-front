@@ -1,6 +1,7 @@
 import { fetchApi } from "./fetchApi";
 
 export const getConfig = async (direction: string, token?: string) => {
+  console.log('token?',token)
   return await fetchApi(direction, {
     method: "get",
     headers: {

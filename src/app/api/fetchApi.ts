@@ -9,8 +9,7 @@ export const fetchApi = async (direction: string, config: RequestOptions) => {
   //   process.env.NODE_ENV === "production"
   //     ? process.env.PRODUCTION_URL
   //     : "http://localhost:3001/api";
-  const BASE_API_URL = process.env.PRODUCTION_URL
-
+  const BASE_API_URL = "https://crud-nextjs-ts.vercel.app/api"
   const url = BASE_API_URL + direction;
   const fullConfig = {
     ...config,

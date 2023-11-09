@@ -10,7 +10,8 @@ export default async function ProductCard(){
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
       {allProducts.map((product:any)=>{
         const {fields, objectID} = product;
-        const {images, title, unit_price } = fields;
+        const {images, title, unit_price, description } = fields;
+
         return (
           <div key={objectID} className="card bg-base-100 shadow-xl">
             <Link href={'/product/'+objectID}>
@@ -24,7 +25,7 @@ export default async function ProductCard(){
                 <p className="font-bold">${unit_price}</p>
               </Link>
               <div className="card-actions">
-                <ProductButton product={{unit_price, title, id: objectID, img: images[0].url}}/>
+                <ProductButton product={{unit_price, title, id: objectID, img: images[0].url, description }}/>
               </div>
             </div>
           </div>

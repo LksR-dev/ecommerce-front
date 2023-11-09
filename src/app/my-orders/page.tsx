@@ -3,10 +3,28 @@ import {ProductItem}  from '@/app/ui/addProductBtn'
 import Image from 'next/image'
 import Link from 'next/link'
 import {useGetCartCookies} from '@/app/hooks/index'
+import { useGetAuthToken } from '../hooks/token'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 
 export default function MyOrders(){
   const cartItems = useGetCartCookies().cartItems;
+  const router = useRouter()
+  const {token, hasToken} = useGetAuthToken();
+  const [showErrorCode, setShowErrorCode] = useState<boolean>(false);
+
+  const handlePayClick = () => {
+    if (hasToken) {
+      router.push('/pay') 
+    } else {
+      setShowErrorCode(true);
+      setTimeout(()=>{
+        setShowErrorCode(false)
+      },5000)
+    }
+  }
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="font-bold text-center mb-8 text-2xl">Mis Pedidos</h1>
@@ -24,10 +42,13 @@ export default function MyOrders(){
             <button className='btn-circle bg-red-500 text-sm font-semibold justify-end w-full'>Remover producto</button>
           </div>
         ))}
-      </div>
-      <Link href='/pay'>
-        <button className='btn-circle bg-blue-600 w-96 mt-11 mx-auto'>Comprar ahora</button>
-      </Link>
+      </div>      
+      <button className='btn-circle bg-blue-600 w-96 mt-11 mx-auto' onClick={handlePayClick}>Comprar ahora</button>
+      {showErrorCode && 
+        <div className="card bg-red-100 p-4 shadow rounded">
+          <h2 className="font-semibold text-lg mb-2">Error de autenticación</h2>
+          <p className="text-gray-600">Debes estar logueado para poder comprar.</p>
+        </div>} 
     </div>
   );
 

@@ -3,18 +3,12 @@ import { useRecoilState } from 'recoil';
 import { cartItemsState, totalItemsState, totalPriceState } from '../lib/cartState';
 import { useEffect } from 'react';
 import Cookies from 'js-cookie';
-
-interface ProductImage {
-  thumbnails: {};
-  url: string;
-}
-
-
 export interface ProductItem {
   unit_price: number;
   title: string;
   id:string;
   img: string;
+  description: string;
 }
 
 function ProductButton({ product }:{product: ProductItem}) {
