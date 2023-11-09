@@ -16,7 +16,7 @@ export default async function Product({params}:{params:{productID:string}}){
         <p>{description}</p>
         <p className='font-bold'>${unit_price}</p>
         <div className="card-actions justify-end">
-          <ProductButton product={{title, unit_price, img: image, id: objectID}} />
+          <ProductButton product={{title, unit_price, img: image, id: objectID, description}} />
         </div>
       </div>
     </div>
