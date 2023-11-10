@@ -1,3 +1,4 @@
+import { UserInterface } from "../pay/page";
 import { getConfig, patchConfig, postConfig } from "./api";
 import { getToken, setAuthToken, removeAuthToken } from '@/app/lib/token'
 
@@ -66,4 +67,13 @@ async function getMyOrders(token:string){
   }
 }
 
-export { sendAuthCode, signUp, products, getProduct, getUserData, goToPay, getMyOrders }
+async function updateUserData(userData: UserInterface,token:string){
+  const response = await patchConfig(`/me`,userData ,token)
+    if(!response.error){
+    return await response;
+  } else {
+    throw new Error(response.error)
+  }
+}
+
+export { sendAuthCode, signUp, products, getProduct, getUserData, goToPay, getMyOrders, updateUserData }

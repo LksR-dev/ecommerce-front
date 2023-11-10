@@ -6,8 +6,7 @@ import { useGetCartCookies } from '@/app/hooks/index'
 import { ProductItem } from '@/app/ui/addProductBtn'
 import { useRouter } from 'next/navigation';
 
-interface UserInterface {
-  id: string;
+export interface UserInterface {
   email: string;
   name: string;
   surname: string;
@@ -16,7 +15,7 @@ interface UserInterface {
   address: AddressInterface;
 }
 
-interface AddressInterface {
+export interface AddressInterface {
   zipCode: string;
   streetName: string;
   cityName: string;

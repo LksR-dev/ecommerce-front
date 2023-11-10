@@ -25,7 +25,7 @@ export default function ProfileButton(){
   }
 
   const userOn = <div className="card-body">
-                  <Link href='/'>Mi perfil</Link>
+                  <Link href='/profile'>Mi perfil</Link>
                   <Link href='/my-orders'>Mis pedidos</Link>
                   <Link href='/' onClick={handleLogout}>Cerrar sesión</Link>
                 </div>;
