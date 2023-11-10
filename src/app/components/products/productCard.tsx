@@ -16,7 +16,7 @@ export default async function ProductCard(){
           <div key={objectID} className="card bg-base-100 shadow-xl">
             <Link href={'/product/'+objectID}>
               <figure className="px-10 pt-10">
-                <Image src={images[0].url} width='80' height='80' alt={title} className="rounded-xl" />
+                <Image src={images[0].url} loading="lazy" width='80' height='80' alt={title} className="rounded-xl" />
               </figure>
             </Link>
             <div className="card-body items-center text-center">

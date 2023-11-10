@@ -94,7 +94,7 @@ export default function Pay() {
               type="text"
               id="cityName"
               className="input input-bordered w-full"
-              defaultValue={userData?.address.cityName || ''}
+              defaultValue={userData?.address?.cityName || ''}
               required
             />
           </div>
@@ -104,7 +104,7 @@ export default function Pay() {
               type="text"
               id="zipCode"
               className="input input-bordered w-full"
-              defaultValue={userData?.address.zipCode || ''}
+              defaultValue={userData?.address?.zipCode || ''}
               required
             />
           </div>

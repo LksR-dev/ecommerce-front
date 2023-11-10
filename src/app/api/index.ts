@@ -57,4 +57,13 @@ async function goToPay(productsIDs: string[], token:string){
   }
 }
 
-export { sendAuthCode, signUp, products, getProduct, getUserData, goToPay }
+async function getMyOrders(token:string){
+  const response = await getConfig(`/me/orders`,token)
+    if(!response.error){
+    return await response;
+  } else {
+    throw new Error(response.error)
+  }
+}
+
+export { sendAuthCode, signUp, products, getProduct, getUserData, goToPay, getMyOrders }

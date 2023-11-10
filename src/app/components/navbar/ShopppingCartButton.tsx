@@ -40,7 +40,7 @@ export default function ShoppingCartButton({cart}:ShoppingCartButtonProps){
             Subtotal: ${totalPrice}
           </span>
           <div className="card-actions">
-            <Link href="/my-orders" className="btn btn-primary btn-block" onClick={closeDropDown}>View cart</Link>
+            <Link href="/my-cart" className="btn btn-primary btn-block" onClick={closeDropDown}>View cart</Link>
           </div>
         </div>
       </div>
